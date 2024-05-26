@@ -1,0 +1,30 @@
+﻿@using StockApp.Models.Entites.DTOs
+
+@model List<CustomerDto>
+
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <table class="table table-bordered">
+            <tr>
+                <th >Müşteri Adı </th>
+                <th>Müşteri Soyadı </th>
+            </tr>
+            
+            @foreach (var item in Model)
+            
+            {
+                <tr>
+                    <td> @item.CustomerName </td>
+                    <td> @item.CustomerSurname </td>
+                    <td> @Html.ActionLink("Güncelle", "Update", "Customer") </td>
+                    <td> @Html.ActionLink("Sil", "Delete", "Customer") </td>
+                </tr>
+            }
+        </table>
+        @Html.ActionLink("Yeni Müşteri Ekle", "Add", "Category")
+    </body>
+    </html>

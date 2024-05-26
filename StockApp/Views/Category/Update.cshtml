@@ -1,0 +1,22 @@
+﻿@using StockApp.Models.Entites.Concrete;
+
+@model Category
+
+<div class="container" style="display:flex;justify-content:center;align-content:center;align-items:center; margin-top:10%;width:30%;"> <h1 class="h1"> Ürün Güncelle </h1> </div>
+<div class="formBody" style="border:outset; padding:2%;">
+
+    <form action="@Url.ActionLink("Update","Category")" method="post" style="padding:5%;">
+
+        @Html.HiddenFor(x => x.CategoryId )
+        <div class="form-group row col-lg-12">
+
+            <label class="col-sm-2 col-form-label"> Ürün Id </label>
+            @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control", @placeholder = "Ürün Id", @style = "text-align:center;" })
+
+        </div>
+
+        <button class="btn btn-primary btn-lg" type="submit" style="display:flex;justify-content:center;align-content:center;align-items:center;"> Ürün Ekle  </button>
+
+    </form>
+
+</div>

@@ -1,0 +1,57 @@
+
+﻿@using StockApp.Models.Entites.Concrete;
+@model List<Product>
+@{
+    var listOfValues = ViewBag.List;
+}
+=======
+﻿
+@using StockApp.Models.Entites.Concrete;
+
+@model List<Product>
+
+
+
+<!DOCTYPE html>
+    <html>
+    <head> </head>
+    
+    <body>
+        <table class="table table-bordered">
+            <tr>
+
+                <th> Ürün Adı </th>
+
+                <th> Kategori Adı </th>
+
+                <th> Marka </th>
+
+                <th> Fiyat </th>
+
+                <th> Stok </th>
+
+            </tr>
+
+            @foreach(var item in Model)
+             {
+                 <tr>
+                    <td> @item.ProductName </td>
+
+                    <td> @item.CategoryId</td>
+
+                    <td> @item.Brand </td>
+
+                    <td> @item.Price </td>
+
+                    <td> @item.Stock </td>
+
+                    <td> @Html.ActionLink("Güncelle","Update","Product", new{ @class = "btn btn-warning"}, new { id = item.ProductId} ) </td>
+
+                    <td> @Html.ActionLink("Sil", "Delete", "Product", new { id = item.ProductId })  </td>
+                </tr>
+            }
+        </table>
+
+    @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", new { @class = "btn btn-primary" })
+    </body>
+    </html>
