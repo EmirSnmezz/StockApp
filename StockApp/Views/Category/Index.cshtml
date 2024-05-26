@@ -1,5 +1,4 @@
 ﻿@using StockApp.Models.Entites.Concrete;
-    using StockApp.Models.Entites.Concrete;
 @model List<Category>
 
 <!DOCTYPE html>
@@ -17,17 +16,10 @@
             @foreach(var item in Model)
             {
                 <tr>
-<<<<<<< HEAD
                     <td> @item.CategoryId </td>
                     <td> @item.CategoryName </td>
                     <td> @Html.ActionLink("Güncelle", "Update", "Category" , new {id = item.CategoryId})</td>
                     <td> @Html.ActionLink("Sil", "Remove", "Category",new{ id = item.CategoryId })</td>
-=======
-                    <td>@item.CategoryId</td>
-                    <td>@item.CategoryName</td>
-                    <td> @Html.ActionLink("Güncelle", "Update", "Category")</td>
-                    <td> @Html.ActionLink("Sil", "Delete", "Category")</td>
->>>>>>> 90e1dedf4d8efd0cbc870711a13f54393cbc2ef5
                 </tr>
             }
         </table>

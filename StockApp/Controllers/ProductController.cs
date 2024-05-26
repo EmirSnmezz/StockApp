@@ -31,23 +31,22 @@ namespace StockApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Add(ProductDTO product)
         {
-            if (product != null)
+            if (product == null)
             {
                 throw new Exception("Ürün Eklenirken Bir Hata Oluştu");
             }
-            List<SelectListItem> list =
-                (from category in _context.Categories.ToList()
-                 select new SelectListItem
-                 {
-                     Text = category.CategoryName,
-                     Value = category.CategoryName
 
-                 }).ToList();
-
-            ViewBag.list = list;
-            _context.Products.Add(product);
+            var result = new Product
+            {
+                ProductName = product.ProductName,
+                CategoryId = _context.Categories.FirstOrDefault(x => x.CategoryName == product.CategoryName).CategoryId,
+                Brand = product.Brand,
+                Price = product.Price,
+                Stock = product.Stock,
+            };
+            _context.Products.Add(result);
             _context.SaveChanges();
 
             return RedirectToAction("Index");
@@ -65,47 +64,7 @@ namespace StockApp.Controllers
             }
 
             throw new Exception("Ürün silinirken bir hata oluştu");
-
-            var result = _context.Products;
-                       
-            return View(result.ToList());
-        }
-        [HttpGet]
-        public IActionResult Add()
-        {
-
-            return View();
         }
 
-        [HttpPost]
-        public IActionResult Add(Product product) 
-        {
-            if (product != null) 
-            {
-                _context.Products.Add(product);
-                _context.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-
-            throw new Exception("Ürün Eklenirken Bir Hata Oluştu");
-
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var result = _context.Products.FirstOrDefault(x => x.ProductId == id);
-
-            if(result != null) 
-            {
-                _context.Products.Remove(result);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            throw new Exception("Ürün silinirken bir hata oluştu");
-
-            
-        }
     }
 }
