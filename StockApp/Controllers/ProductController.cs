@@ -26,19 +26,24 @@ namespace StockApp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-
+            List<SelectListItem> values = (from category in _context.Categories.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = category.CategoryName,
+                                               Value = category.CategoryId.ToString()
+                                           }).ToList();
+            ViewBag.Values = values;
             return View();
         }
 
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            var result = _context.Categories.Where(x => x.CategoryId == product.CategoryId).FirstOrDefault();
             if (product == null)
             {
                 throw new Exception("Ürün Eklenirken Bir Hata Oluştu");
             }
-            product.CategoryId = result.CategoryId;
+
             _context.Products.Add(product);
             _context.SaveChanges();
 
