@@ -31,22 +31,15 @@ namespace StockApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductDTO product)
+        public IActionResult Add(Product product)
         {
+            var result = _context.Categories.Where(x => x.CategoryId == product.CategoryId).FirstOrDefault();
             if (product == null)
             {
                 throw new Exception("Ürün Eklenirken Bir Hata Oluştu");
             }
-
-            var result = new Product
-            {
-                ProductName = product.ProductName,
-                CategoryId = _context.Categories.FirstOrDefault(x => x.CategoryName == product.CategoryName).CategoryId,
-                Brand = product.Brand,
-                Price = product.Price,
-                Stock = product.Stock,
-            };
-            _context.Products.Add(result);
+            product.CategoryId = result.CategoryId;
+            _context.Products.Add(product);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

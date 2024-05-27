@@ -1,5 +1,5 @@
-﻿@using StockApp.Models.Entites.DTOs;
-@model ProductDTO
+﻿@using StockApp.Models.Entites.Concrete;
+@model Product
 
 <div class="container" style="display:flex;justify-content:center;align-content:center;align-items:center;"> 
     
@@ -24,7 +24,7 @@
 
         <div class="form-group row col-lg-12">
             <label class="col-sm-2 col-form-label"> Category Id </label>
-            @Html.TextBoxFor(x => x.CategoryName, new{@class="form-control"})
+            @Html.TextBoxFor(x => x.CategoryId, new { @class = "form-control", @placeholder = "Kategori Adı", @style = "text-align:center;" })
         </div>
         <button class="btn btn-primary btn-lg" type="submit"> Ürün Ekle  </button>
         </div>
