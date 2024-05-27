@@ -1,9 +1,7 @@
 
+@using StockApp.Models.Entites.DTOs;
 
-﻿
-@using StockApp.Models.Entites.Concrete;
-
-@model List<Product>
+@model List<ProductDTO>
 
 
 
@@ -32,7 +30,7 @@
                  <tr>
                     <td> @item.ProductName </td>
 
-                    <td> @item.CategoryId</td>
+                    <td> @item.CategoryName</td>
 
                     <td> @item.Brand </td>
 
