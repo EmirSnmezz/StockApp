@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockApp.Models;
 using StockApp.Models.Entites.DTOs;
+using StockApp.Models.Entites.Concrete;
 
 namespace StockApp.Controllers
 {
@@ -29,6 +30,28 @@ namespace StockApp.Controllers
             }
 
             return View(customerDtos);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Customer customer)
+        {
+            var result = _context.Customers.ToList();
+
+            if(result.FirstOrDefault(x=> x.CustomerId == customer.CustomerId) != null)
+            {
+                throw new Exception("Ürün zaten mevcut");
+            }
+
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
         }
     }
 }

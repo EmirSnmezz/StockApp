@@ -1,0 +1,23 @@
+﻿@using StockApp.Models.Entites.Concrete
+@model Customer
+
+<h1 class="h1" style="display:flex; justify-content:center; justify-items:center;margin-top:5%"> Yeni Müşteri Ekle </h1>
+
+<div class="container" style="display:flex;justify-content:center;align-content:center;align-items:center;margin-top:10%">
+    <div class="formBody" style="border:outset; padding:2%;">
+
+        <form action="@Url.ActionLink("Add", "Customer")" method="post" style="padding5%;">
+
+            <div class="form-group row col-lg-12">
+                <label class="col-sm-2 col-form-label"> Müşteri Adı </label>
+                @Html.TextBoxFor(x => x.CustomerName, new {@class = "form-control", @placeholder = "Müşteri Adı", @style = "text-align:center" })
+
+                <div class="form-group row col-lg-12">
+                    <label class="col-sm-2 col-form-label"> Müşteri Soyadı </label>
+                @Html.TextBoxFor(x => x.CustomerSurname, new { @class = "form-control", @placeholder = "Müşteri Soyadı", @style = "text-align:center" })
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg" type="submit" style="display:flex; justify-content:center; justify-items:center; align-items:center;"> Yeni Müşteri Ekle </button>
+        </form>
+    </div>
+</div>
