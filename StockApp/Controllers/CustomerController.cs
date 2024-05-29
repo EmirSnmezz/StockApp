@@ -14,15 +14,16 @@ namespace StockApp.Controllers
         }
         public IActionResult Index()
         {
-           List<CustomerDto> customerDtos = new List<CustomerDto>();
-           var customerResult =  _context.Customers.ToList();
+            List<CustomerDto> customerDtos = new List<CustomerDto>();
+            var customerResult = _context.Customers.ToList();
 
-            foreach (var customer in customerResult) 
+            foreach (var customer in customerResult)
             {
                 customerDtos.Add
                     (
                     new CustomerDto
                     {
+                        CustomerId = customer.CustomerId,
                         CustomerName = customer.CustomerName,
                         CustomerSurname = customer.CustomerSurname
                     }
@@ -43,15 +44,31 @@ namespace StockApp.Controllers
         {
             var result = _context.Customers.ToList();
 
-            if(result.FirstOrDefault(x=> x.CustomerId == customer.CustomerId) != null)
+            if (result.FirstOrDefault(x => x.CustomerId == customer.CustomerId) != null)
             {
                 throw new Exception("Ürün zaten mevcut");
             }
 
             _context.Customers.Add(customer);
             _context.SaveChanges();
-            return RedirectToAction("Index");
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var result = _context.Customers.First(x => x.CustomerId == id);
+
+            if (result == null)
+            {
+                throw new Exception("Belirtilen Müşteri Bulunamadı Lütfen Sistem Yöneticisiyle İletişime Geçiniz !");
+            }
+
+            _context.Customers.Remove(result);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

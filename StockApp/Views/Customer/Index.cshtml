@@ -15,13 +15,12 @@
             </tr>
             
             @foreach (var item in Model)
-            
             {
                 <tr>
                     <td> @item.CustomerName </td>
                     <td> @item.CustomerSurname </td>
-                    <td> @Html.ActionLink("Güncelle", "Update", "Customer") </td>
-                    <td> @Html.ActionLink("Sil", "Delete", "Customer") </td>
+                    <td> @Html.ActionLink("Güncelle", "Update", "Customer", new{ @id = item.CustomerId}) </td>
+                    <td> @Html.ActionLink("Sil", "Delete", "Customer", new { @id = item.CustomerId}) </td>
                 </tr>
             }
         </table>
