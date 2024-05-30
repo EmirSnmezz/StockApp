@@ -1,4 +1,3 @@
-
 @using StockApp.Models.Entites.DTOs;
 
 @model List<ProductDTO>
@@ -6,45 +5,49 @@
 
 
 <!DOCTYPE html>
-    <html>
-    <head> </head>
-    
-    <body>
-        <table class="table table-bordered">
+<html>
+<head>
+</head>
+
+<body>
+    <table class="table table-bordered table-hover" style="text-align:center">
+        <tr>
+
+            <th> Ürün Adı </th>
+
+            <th> Kategori Adı </th>
+
+            <th> Marka </th>
+
+            <th> Fiyat </th>
+
+            <th> Stok </th>
+            <th colspan="2"> İşlemler </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
+                <td> @item.ProductName </td>
 
-                <th> Ürün Adı </th>
+                <td> @item.CategoryName</td>
 
-                <th> Kategori Adı </th>
+                <td> @item.Brand </td>
 
-                <th> Marka </th>
+                <td> @item.Price </td>
 
-                <th> Fiyat </th>
+                <td> @item.Stock </td>
 
-                <th> Stok </th>
+                <td style="width:40%; justify-content:center; align-items:center">
+                    @Html.ActionLink("Güncelle", "Update", "Product", new { @id = item.ProductId }, new { @class = "btn btn-warning", @style = "width:30%;" })
+                    @Html.ActionLink("Sil", "Delete", "Product", new { @id = item.ProductId }, new { @class = "btn btn-danger", @style = "width:30%;" })
+                </td>
 
             </tr>
-
-            @foreach(var item in Model)
-             {
-                 <tr>
-                    <td> @item.ProductName </td>
-
-                    <td> @item.CategoryName</td>
-
-                    <td> @item.Brand </td>
-
-                    <td> @item.Price </td>
-
-                    <td> @item.Stock </td>
-
-                    <td> @Html.ActionLink("Güncelle","Update","Product", new{ @class = "btn btn-warning"}, new { id = item.ProductId} ) </td>
-
-                    <td> @Html.ActionLink("Sil", "Delete", "Product", new { id = item.ProductId })  </td>
-                </tr>
-            }
-        </table>
+        }
+    </table>
 
     @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", new { @class = "btn btn-primary" })
-    </body>
-    </html>
+</body>
+</html>

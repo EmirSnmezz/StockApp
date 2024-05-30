@@ -3,27 +3,32 @@
 @model List<CustomerDto>
 
 <!DOCTYPE html>
-    <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <table class="table table-bordered">
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <table class="table table-bordered table-hover" style="text-align:center">
+        <tr>
+            <th>Müşteri Adı </th>
+            <th>Müşteri Soyadı </th>
+            <th colspan="2"> İşlem </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th >Müşteri Adı </th>
-                <th>Müşteri Soyadı </th>
+                <td> @item.CustomerName </td>
+                <td> @item.CustomerSurname </td>
+                <td style="width:40%; justify-content:center; align-items:center">
+                    @Html.ActionLink("Güncelle", "Update", "Customer", new { @id = item.CustomerId }, new { @class = "btn btn-warning", @style = "width:30%;" })
+                    @Html.ActionLink("Sil", "Delete", "Customer", new { @id = item.CustomerId }, new { @class = "btn btn-danger", @style = "width:30%;" })
+                </td>
+
             </tr>
-            
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td> @item.CustomerName </td>
-                    <td> @item.CustomerSurname </td>
-                    <td> @Html.ActionLink("Güncelle", "Update", "Customer", new{ @id = item.CustomerId}) </td>
-                    <td> @Html.ActionLink("Sil", "Delete", "Customer", new { @id = item.CustomerId}) </td>
-                </tr>
-            }
-        </table>
-        @Html.ActionLink("Yeni Müşteri Ekle", "Add", "Customer")
-    </body>
-    </html>
+        }
+    </table>
+    @Html.ActionLink("Yeni Müşteri Ekle", "Add", "Customer")
+</body>
+</html>

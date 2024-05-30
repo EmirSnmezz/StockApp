@@ -2,28 +2,32 @@
 @model List<Category>
 
 <!DOCTYPE html>
-    <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <table class="table table-bordered table-hover">
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <table class="table table-bordered table-hover" style="text-align:center">
+        <tr>
+            <th> Kategori ID</th>
+            <th> Kategori Adı</th>
+            <th colspan="2"> İşlem </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th> Kategori ID</th>
-                <th> Kategori Adı</th>
+                <td> @item.CategoryId </td>
+                <td> @item.CategoryName </td>
+                <td style="width:40%; justify-content:center; align-items:center">
+                    @Html.ActionLink("Güncelle", "Update", "Category", new { @id = item.CategoryId }, new { @class = "btn btn-warning", @style = "width:30%;" })
+                    @Html.ActionLink("Sil", "Delete", "Category", new { @id = item.CategoryId }, new { @class = "btn btn-danger", @style = "width:30%;" })
+                </td>
+
             </tr>
+        }
+    </table>
 
-            @foreach(var item in Model)
-            {
-                <tr>
-                    <td> @item.CategoryId </td>
-                    <td> @item.CategoryName </td>
-                    <td> @Html.ActionLink("Güncelle", "Update", "Category" , new {id = item.CategoryId})</td>
-                    <td> @Html.ActionLink("Sil", "Remove", "Category",new{ id = item.CategoryId })</td>
-                </tr>
-            }
-        </table>
-
-        @Html.ActionLink("Yeni Kategori Ekle", "Add", "Category")
-    </body>
-    </html>
+    @Html.ActionLink("Yeni Kategori Ekle", "Add", "Category")
+</body>
+</html>

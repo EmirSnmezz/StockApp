@@ -20,17 +20,17 @@ namespace StockApp.Controllers
         public IActionResult Index()
         {
             var result = (from product in _context.Products
-                         join category in _context.Categories
-                         on product.CategoryId equals category.CategoryId
-                         select new ProductDTO
-                         {
-                             ProductId = product.ProductId,
-                             CategoryName = category.CategoryName,
-                             Brand = product.Brand,
-                             Price = product.Price,
-                             ProductName = product.ProductName,
-                             Stock = product.Stock,
-                         }).ToList();
+                          join category in _context.Categories
+                          on product.CategoryId equals category.CategoryId
+                          select new ProductDTO
+                          {
+                              ProductId = product.ProductId,
+                              CategoryName = category.CategoryName,
+                              Brand = product.Brand,
+                              Price = product.Price,
+                              ProductName = product.ProductName,
+                              Stock = product.Stock,
+                          }).ToList();
 
             return View(result);
         }
