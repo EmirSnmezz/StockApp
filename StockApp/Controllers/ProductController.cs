@@ -75,5 +75,24 @@ namespace StockApp.Controllers
             throw new Exception("Ürün silinirken bir hata oluştu");
         }
 
+        [HttpGet]
+        public IActionResult Update (int id)
+        {
+            var result = _context.Products.FirstOrDefault(x => x.ProductId == id);
+
+            if (result == null)
+            {
+                throw new Exception("İd lerle ilgili bir problem var durumu incele");
+            }
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Update (Product product)
+        {
+            return null;
+        }
+
     }
 }
