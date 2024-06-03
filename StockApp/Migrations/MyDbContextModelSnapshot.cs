@@ -10,7 +10,7 @@ using StockApp.Models;
 namespace StockApp.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class ProductContextModelSnapshot : ModelSnapshot
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace StockApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StockApp.Models.Category", b =>
+            modelBuilder.Entity("StockApp.Models.Entites.Concrete.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -30,7 +30,6 @@ namespace StockApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
@@ -38,7 +37,7 @@ namespace StockApp.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("StockApp.Models.Customer", b =>
+            modelBuilder.Entity("StockApp.Models.Entites.Concrete.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -59,7 +58,7 @@ namespace StockApp.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("StockApp.Models.Order", b =>
+            modelBuilder.Entity("StockApp.Models.Entites.Concrete.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -84,7 +83,7 @@ namespace StockApp.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("StockApp.Models.Product", b =>
+            modelBuilder.Entity("StockApp.Models.Entites.Concrete.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -95,11 +94,11 @@ namespace StockApp.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductCategory")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");

@@ -10,7 +10,7 @@ namespace StockApp
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder();
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MyDbContext>(options =>
             {
