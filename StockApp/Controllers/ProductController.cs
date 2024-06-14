@@ -21,15 +21,18 @@ namespace StockApp.Controllers
         {
             var result = (from product in _context.Products
                           join category in _context.Categories
-                          on product.CategoryId equals category.CategoryId
+                           on product.CategoryId equals category.CategoryId
+                           join brand in _context.Brands
+                            on product.BrandId equals brand.BrandId
                           select new ProductDTO
                           {
                               ProductId = product.ProductId,
-                              CategoryName = category.CategoryName,
-                              Brand = product.Brand,
-                              Price = product.Price,
                               ProductName = product.ProductName,
+                              CategoryName = category.CategoryName,
+                              Brand = brand.BrandName,
                               Stock = product.Stock,
+                              Price = product.Price
+
                           }).ToList();
 
             return View(result);
@@ -76,10 +79,18 @@ namespace StockApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update (int id)
+        public IActionResult Update(int id)
         {
             var result = _context.Products.FirstOrDefault(x => x.ProductId == id);
+            
+           List<SelectListItem> categoryValues =(from category in _context.Categories.ToList()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text=category.CategoryName,
+                                                     Value= category.CategoryId.ToString()
+                                                 }).ToList() ;
 
+            ViewBag.values = categoryValues;
             if (result == null)
             {
                 throw new Exception("İd lerle ilgili bir problem var durumu incele");
@@ -89,10 +100,13 @@ namespace StockApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update (Product product)
+        public IActionResult Update(Product product)
         {
-            return null;
+            
+            _context.Products.Update(product);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
-
     }
+
 }

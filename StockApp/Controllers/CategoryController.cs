@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 using StockApp.Models;
 using StockApp.Models.Entites.Concrete;
 

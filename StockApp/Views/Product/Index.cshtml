@@ -1,5 +1,4 @@
 @using StockApp.Models.Entites.DTOs;
-
 @model List<ProductDTO>
 
 
@@ -29,6 +28,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                @Html.HiddenFor(x=> item.ProductId) <br/>
                 <td> @item.ProductName </td>
 
                 <td> @item.CategoryName</td>
@@ -46,8 +46,9 @@
 
             </tr>
         }
+        @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", new { @class = "btn btn-warning", @style = "width:30%;" })
     </table>
 
-    @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", new { @class = "btn btn-primary" })
+   
 </body>
 </html>
