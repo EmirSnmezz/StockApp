@@ -23,7 +23,7 @@ namespace StockApp.Controllers
                           join category in _context.Categories
                            on product.CategoryId equals category.CategoryId
                            join brand in _context.Brands
-                            on product.BrandId equals brand.BrandId
+                           on product.BrandId equals brand.BrandId
                           select new ProductDTO
                           {
                               ProductId = product.ProductId,
@@ -40,13 +40,22 @@ namespace StockApp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            List<SelectListItem> values = (from category in _context.Categories.ToList()
+            List<SelectListItem> Categories = (from category in _context.Categories.ToList()
                                            select new SelectListItem
                                            {
                                                Text = category.CategoryName,
                                                Value = category.CategoryId.ToString()
                                            }).ToList();
-            ViewBag.Values = values;
+            ViewBag.Categories = Categories;
+
+            List<SelectListItem> Brands = (from brand in _context.Brands.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = brand.BrandName,
+                                               Value = brand.BrandId.ToString()
+                                           }).ToList();
+            ViewBag.Brands = Brands;
+                                           
             return View();
         }
 
