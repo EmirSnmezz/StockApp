@@ -42,6 +42,11 @@ namespace StockApp.Controllers
         [HttpPost]
         public IActionResult Add(Customer customer)
         {
+            if(!ModelState.IsValid)
+            {
+                return View("Add");
+            }
+
             var result = _context.Customers.ToList();
 
             if (result.FirstOrDefault(x => x.CustomerId == customer.CustomerId) != null)

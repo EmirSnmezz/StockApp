@@ -1,0 +1,29 @@
+﻿@using StockApp.Models.Entites.Concrete;
+@model Brand;
+
+
+<div class="Headercontainer" style="display:flex;justify-content:center;align-content:center;align-items:center; margin-top:5%;">
+    <h1 class="h1"> Marka Ekle </h1>
+</div>
+
+<hr / style="width:50%">
+
+<div class="FormBody">
+    <div class="container">
+        <form action="@Url.ActionLink("Add","Brand")" method="post">
+            <div class="form-group row col-lg-12">
+
+                <label class="col-sm-2 col-form-label"> Marka Adı </label>
+                @Html.TextBoxFor(x => x.BrandName, new { @class = "form-control" })
+
+            </div>
+
+
+            <button class="btn btn-primary btn-lg" type="submit"> Ürün Ekle  </button>
+        </form>
+       
+    </div>
+</div>
+
+
+

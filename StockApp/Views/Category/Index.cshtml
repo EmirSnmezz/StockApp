@@ -9,7 +9,6 @@
 <body>
     <table class="table table-bordered table-hover" style="text-align:center">
         <tr>
-            <th> Kategori ID</th>
             <th> Kategori Adı</th>
             <th colspan="2"> İşlem </th>
         </tr>
@@ -17,7 +16,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td> @item.CategoryId </td>
                 <td> @item.CategoryName </td>
                 <td style="width:40%; justify-content:center; align-items:center">
                     @Html.ActionLink("Güncelle", "Update", "Category", new { @id = item.CategoryId }, new { @class = "btn btn-warning", @style = "width:30%;" })
@@ -28,6 +26,6 @@
         }
     </table>
 
-    @Html.ActionLink("Yeni Kategori Ekle", "Add", "Category")
+    @Html.ActionLink("Yeni Kategori Ekle", "Add", "Category" , null, new {@class="btn btn-primary btn-md"})
 </body>
 </html>

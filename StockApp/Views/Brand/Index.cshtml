@@ -1,0 +1,27 @@
+﻿@using StockApp.Models.Entites.Concrete;
+@model List<Brand>
+
+
+<div class="container" style="width:100%;">
+    <table class="table table-bordered table-hover" >
+        <tr>
+            <th> Marka Adı </th>
+            <th colspan="2"> İşlemler </th>
+        </tr>
+
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td> @item.BrandName </td>
+                <td> 
+                    @Html.ActionLink("Güncelle", "Update", "Brand", new { @id = item.BrandId }, new { @class = "btn btn-warning btn-md", @style = "width:45%; margin-right:3%" })
+                    @Html.ActionLink("Sil", "Delete", "Brand", new { @id = item.BrandId }, new { @class = "btn btn-danger btn-md", @style = "width:45%; margin-right:3%" })
+                </td>
+              
+            </tr>
+        }
+
+    </table>
+
+    <div class="button-container">  @Html.ActionLink("Yeni Marka Ekle", "Add", "Brand", null, new{@class="btn btn-primary btn-md"})  </div>
+</div>

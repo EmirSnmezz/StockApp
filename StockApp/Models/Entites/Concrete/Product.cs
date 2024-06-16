@@ -1,11 +1,18 @@
-﻿namespace StockApp.Models.Entites.Concrete
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace StockApp.Models.Entites.Concrete
 {
     public class Product
     {
         public int ProductId { get; set; }
-        public string? ProductName { get; set; }
-        public int? CategoryId { get; set; }
-        public int? BrandId { get; set; }
+
+        [Required(ErrorMessage = "Ürün Adı Boş Geçilemez")]
+        public string ProductName { get; set; }
+
+        [Required(ErrorMessage = "Ürün Adı Boş Geçilemez")]
+        public int CategoryId { get; set; }
+        [Required(ErrorMessage = "Ürün Adı Boş Geçilemez")]
+        public int BrandId { get; set; }
         public int Price { get; set; }
         public int Stock { get; set; }
     }

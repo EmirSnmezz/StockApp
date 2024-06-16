@@ -26,6 +26,10 @@ namespace StockApp.Controllers
         [HttpPost]
         public IActionResult Add(Category category)
         {
+            if(!ModelState.IsValid)
+            {
+                return View("Add");
+            }
             _context.Categories.Add(category);
             _context.SaveChanges();
             return RedirectToAction("Index");

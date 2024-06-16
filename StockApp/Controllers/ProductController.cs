@@ -13,27 +13,29 @@ namespace StockApp.Controllers
     public class ProductController : Controller
     {
         MyDbContext _context;
+
         public ProductController(MyDbContext context)
         {
             _context = context;
         }
         public IActionResult Index()
         {
-            var result = (from product in _context.Products
-                          join category in _context.Categories
-                           on product.CategoryId equals category.CategoryId
-                           join brand in _context.Brands
-                           on product.BrandId equals brand.BrandId
-                          select new ProductDTO
-                          {
-                              ProductId = product.ProductId,
-                              ProductName = product.ProductName,
-                              CategoryName = category.CategoryName,
-                              Brand = brand.BrandName,
-                              Stock = product.Stock,
-                              Price = product.Price
 
-                          }).ToList();
+            List<ProductDTO> result = (from product in _context.Products
+                                       join category in _context.Categories
+                                        on product.CategoryId equals category.CategoryId
+                                       join brand in _context.Brands
+                                       on product.BrandId equals brand.BrandId
+                                       select new ProductDTO
+                                       {
+                                           ProductId = product.ProductId,
+                                           ProductName = product.ProductName,
+                                           CategoryName = category.CategoryName,
+                                           Brand = brand.BrandName,
+                                           Stock = product.Stock,
+                                           Price = product.Price
+
+                                       }).ToList();
 
             return View(result);
         }
@@ -41,21 +43,26 @@ namespace StockApp.Controllers
         public IActionResult Add()
         {
             List<SelectListItem> Categories = (from category in _context.Categories.ToList()
-                                           select new SelectListItem
-                                           {
-                                               Text = category.CategoryName,
-                                               Value = category.CategoryId.ToString()
-                                           }).ToList();
-            ViewBag.Categories = Categories;
+                                               select new SelectListItem
+                                               {
+                                                   Text = category.CategoryName,
+                                                   Value = category.CategoryId.ToString()
+                                               }).ToList();
+
+            if(Categories == null)
+            {
+                throw new Exception("Datanın içi boşalıyor");
+            }
 
             List<SelectListItem> Brands = (from brand in _context.Brands.ToList()
-                                           select new SelectListItem
-                                           {
-                                               Text = brand.BrandName,
-                                               Value = brand.BrandId.ToString()
-                                           }).ToList();
-            ViewBag.Brands = Brands;
-                                           
+                                            select new SelectListItem
+                                            {
+                                                Text = brand.BrandName,
+                                                Value = brand.BrandId.ToString()
+                                            }).ToList();
+            TempData["Brand"] = Brands;
+            TempData["Categories"] = Categories;
+
             return View();
         }
 
@@ -65,6 +72,11 @@ namespace StockApp.Controllers
             if (product == null)
             {
                 throw new Exception("Ürün Eklenirken Bir Hata Oluştu");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("Add");
             }
 
             _context.Products.Add(product);
@@ -91,13 +103,13 @@ namespace StockApp.Controllers
         public IActionResult Update(int id)
         {
             var result = _context.Products.FirstOrDefault(x => x.ProductId == id);
-            
-           List<SelectListItem> categoryValues =(from category in _context.Categories.ToList()
-                                                 select new SelectListItem
-                                                 {
-                                                     Text=category.CategoryName,
-                                                     Value= category.CategoryId.ToString()
-                                                 }).ToList() ;
+
+            List<SelectListItem> categoryValues = (from category in _context.Categories.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = category.CategoryName,
+                                                       Value = category.CategoryId.ToString()
+                                                   }).ToList();
 
             ViewBag.values = categoryValues;
             if (result == null)
@@ -111,7 +123,7 @@ namespace StockApp.Controllers
         [HttpPost]
         public IActionResult Update(Product product)
         {
-            
+
             _context.Products.Update(product);
             _context.SaveChanges();
             return RedirectToAction("Index");

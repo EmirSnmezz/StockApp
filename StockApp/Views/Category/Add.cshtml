@@ -9,12 +9,13 @@
 
         <div class="form-group row col-lg-12">
 
-            <label class="col-sm-2 col-form-label"> Ürün Id </label>
+            <label class="col-sm-2 col-form-label"> Kategori Adı </label>
             @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control", @placeholder = "Kategori Adı", @style = "text-align:center;" })
+            @Html.ValidationMessageFor(x => x.CategoryName, "", new{ @style = "color:red;"})
 
         </div>
 
-        <button class="btn btn-primary btn-lg" type="submit" style="display:flex;justify-content:center;align-content:center;align-items:center;"> Ürün Ekle  </button>
+        <button class="btn btn-primary btn-lg" type="submit" style="display:flex;justify-content:center;align-content:center;align-items:center;"> Yeni Kategori Ekle  </button>
 
     </form>
 

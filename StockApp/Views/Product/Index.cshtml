@@ -1,54 +1,56 @@
 @using StockApp.Models.Entites.DTOs;
 @model List<ProductDTO>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
 </head>
 
 <body>
-    <table class="table table-bordered table-hover" style="text-align:center">
-        <tr>
 
-            <th> Ürün Adı </th>
-
-            <th> Kategori Adı </th>
-
-            <th> Marka </th>
-
-            <th> Fiyat </th>
-
-            <th> Stok </th>
-            <th colspan="2"> İşlemler </th>
-
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table class="table table-bordered table-hover" style="margin-top:-12%;">
             <tr>
-                @Html.HiddenFor(x=> item.ProductId) <br/>
-                <td> @item.ProductName </td>
 
-                <td> @item.CategoryName</td>
+                <th> Ürün Adı </th>
 
-                <td> @item.Brand </td>
+                <th> Kategori Adı </th>
 
-                <td> @item.Price </td>
+                <th> Marka </th>
 
-                <td> @item.Stock </td>
+                <th> Fiyat </th>
 
-                <td style="width:40%; justify-content:center; align-items:center">
-                    @Html.ActionLink("Güncelle", "Update", "Product", new { @id = item.ProductId }, new { @class = "btn btn-warning", @style = "width:30%;" })
-                    @Html.ActionLink("Sil", "Delete", "Product", new { @id = item.ProductId }, new { @class = "btn btn-danger", @style = "width:30%;" })
-                </td>
+                <th> Stok </th>
+
+                <th colspan="2"> İşlemler </th>
 
             </tr>
-        }
-        @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", new { @class = "btn btn-warning", @style = "width:30%;" })
-    </table>
 
-   
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @Html.HiddenFor(x => item.ProductId)
+                    <br />
+                    <td> @item.ProductName </td>
+
+                    <td> @item.CategoryName</td>
+
+                    <td> @item.Brand </td>
+
+                    <td> @item.Price </td>
+
+                    <td> @item.Stock </td>
+
+                    <td style="width:100%; display:flex; flex-direction:row; justify-content:center; align-items:center;">
+
+                    @Html.ActionLink("Güncelle", "Update", "Product", new { @id = item.ProductId }, new { @class = "btn btn-warning", @style = "width:45%; margin-right:3%;" })
+                        @Html.ActionLink("Sil", "Delete", "Product", new { @id = item.ProductId }, new { @class = "btn btn-danger", @style = "width:45%;"})
+
+                    </td>
+
+                </tr>
+            }
+        </table>
+        @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", null, new { @class = "btn btn-primary btn-md",})
+
 </body>
 </html>

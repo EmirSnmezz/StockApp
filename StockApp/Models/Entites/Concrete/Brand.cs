@@ -1,4 +1,6 @@
-﻿namespace StockApp.Models.Entites.Concrete
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace StockApp.Models.Entites.Concrete
 {
     public class Brand
     {
