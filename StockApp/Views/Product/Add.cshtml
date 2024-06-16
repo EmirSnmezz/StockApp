@@ -1,9 +1,9 @@
 ﻿@using StockApp.Models.Entites.Concrete;
 @model Product
 @{
+
     var categories = TempData["Categories"] as List<SelectListItem>;
     var brands = TempData["Brand"] as List<SelectListItem>;
-
 }
 
 <div class="container" style="display:flex;justify-content:center;align-content:center;align-items:center; margin-top:5%;">
@@ -18,7 +18,7 @@
         <div class="form-group row col-lg-12">
 
             <label class="col-sm-2 col-form-label"> Ürün Adı </label>
-            @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control", @placeholder = "Ürün Adı", @style = "text-align:center;" })
+            @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control", @placeholder = "Ürün Adı", @style = "text-align:center;", @required="" })
             @Html.ValidationMessageFor(x => x.ProductName, "", new{@style="color:red;"})
 
         </div>
@@ -26,7 +26,7 @@
         <div class="form-group row col-lg-12">
 
             <label class="col-sm-2 col-form-label"> Kategori Seçiniz </label>
-            @Html.DropDownListFor(x => x.CategoryId, categories, "Kategori Seçiniz", new { @class = "form-control", @placeholder = "Kategori Adı", @style = "text-align:center;" })
+            @Html.DropDownListFor(x => x.CategoryId, categories, "Kategori Seçiniz", new { @class = "form-control", @placeholder = "Kategori Adı", @style = "text-align:center;", @required = "" })
             @Html.ValidationMessageFor(x => x.CategoryId, "", new{@style="color:red;"})
 
         </div>
@@ -34,7 +34,7 @@
         <div class="form-group row col-lg-12">
 
             <label class="col-sm-2 col-form-label"> Marka </label>
-            @Html.DropDownListFor(x => x.BrandId, brands, "Marka Seçiniz", new { @class = "form-control", @placeholder = "Marka", @style = "text-align:center;", @value = "Marka;" })
+            @Html.DropDownListFor(x => x.BrandId, brands, "Marka Seçiniz", new { @class = "form-control", @placeholder = "Marka", @style = "text-align:center;", @value = "Marka;", @required = "" })
             @Html.ValidationMessageFor(x => x.BrandId, "", new { @style = "color:red;" })
 
         </div>
@@ -42,14 +42,14 @@
         <div class="form-group row col-lg-12">
 
             <label class="col-sm-2 col-form-label"> Stok </label>
-            @Html.TextBoxFor(x => x.Stock, new { @class = "form-control", @placeholder = "Stok", @style = "text-align:center;" })
+            @Html.TextBoxFor(x => x.Stock, new { @class = "form-control", @placeholder = "Stok", @style = "text-align:center;", @required = "" })
 
         </div>
 
         <div class="form-group row col-lg-12">
 
             <label class="col-sm-2 col-form-label"> Fiyat </label>
-            @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Fiyat", @style = "text-align:center;" })
+            @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Fiyat", @style = "text-align:center;", @required = "" })
 
         </div>
 

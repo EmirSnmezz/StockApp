@@ -49,10 +49,6 @@ namespace StockApp.Controllers
                                                    Value = category.CategoryId.ToString()
                                                }).ToList();
 
-            if(Categories == null)
-            {
-                throw new Exception("Datanın içi boşalıyor");
-            }
 
             List<SelectListItem> Brands = (from brand in _context.Brands.ToList()
                                             select new SelectListItem
@@ -72,11 +68,6 @@ namespace StockApp.Controllers
             if (product == null)
             {
                 throw new Exception("Ürün Eklenirken Bir Hata Oluştu");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View("Add");
             }
 
             _context.Products.Add(product);
