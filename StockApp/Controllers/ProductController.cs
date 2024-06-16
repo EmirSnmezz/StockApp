@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.AspNetCore.Mvc.Rendering;
-
 using Microsoft.EntityFrameworkCore;
 using StockApp.Models;
 using StockApp.Models.Entites.Concrete;
 using StockApp.Models.Entites.DTOs;
+using X.PagedList;
 
 
 namespace StockApp.Controllers
@@ -13,19 +12,22 @@ namespace StockApp.Controllers
     public class ProductController : Controller
     {
         MyDbContext _context;
+        
 
         public ProductController(MyDbContext context)
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, string searchText = "" )
         {
+          
 
-            List<ProductDTO> result = (from product in _context.Products
+           IPagedList<ProductDTO> result = (from product in _context.Products
                                        join category in _context.Categories
                                         on product.CategoryId equals category.CategoryId
                                        join brand in _context.Brands
                                        on product.BrandId equals brand.BrandId
+                                       where product.ProductName.Contains(searchText)
                                        select new ProductDTO
                                        {
                                            ProductId = product.ProductId,
@@ -35,8 +37,7 @@ namespace StockApp.Controllers
                                            Stock = product.Stock,
                                            Price = product.Price
 
-                                       }).ToList();
-
+                                       }).ToList().ToPagedList(page,5); // ToPagedList methodu iki parametre almaktadır. birincisi sayfalama kaçıncı sayfadan başlayacaksa odur ikincisi ise bir sayfada kaç eleman, görüntülenecek kaç veri olmasını istiyorsak odur.
             return View(result);
         }
         [HttpGet]

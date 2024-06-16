@@ -265,3 +265,6 @@ C:\Users\emirc\source\repos\50DersteMVC\StockApp\bin\Debug\net8.0\zh-Hans\Micros
 C:\Users\emirc\source\repos\50DersteMVC\StockApp\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\emirc\source\repos\50DersteMVC\StockApp\bin\Debug\net8.0\bundleconfig.json
 C:\Users\emirc\source\repos\50DersteMVC\StockApp\obj\Debug\net8.0\StockApp.sourcelink.json
+C:\Users\emirc\source\repos\50DersteMVC\StockApp\bin\Debug\net8.0\X.PagedList.dll
+C:\Users\emirc\source\repos\50DersteMVC\StockApp\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
+C:\Users\emirc\source\repos\50DersteMVC\StockApp\obj\Debug\net8.0\StockApp.MvcApplicationPartsAssemblyInfo.cs

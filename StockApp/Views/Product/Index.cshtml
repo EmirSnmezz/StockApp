@@ -1,14 +1,26 @@
-@using StockApp.Models.Entites.DTOs;
-@model List<ProductDTO>
+@using StockApp.Models.Entites.DTOs
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<ProductDTO>
 
 <!DOCTYPE html>
 <html>
 <head>
+    
 </head>
 
 <body>
 
-    <table class="table table-bordered table-hover" style="margin-top:-12%;">
+    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+    {
+        <div class="form-group row col-lg-2">
+            <label class="col-sm-2 col-form-label"> Ara </label>
+            @Html.TextBox("searchText",null , new{@class="form-control"} )
+            </div>
+        <button type="submit"> Ara </button>
+    }
+
+    <table class="table table-bordered table-hover" >
             <tr>
 
                 <th> Ürün Adı </th>
@@ -51,6 +63,8 @@
             }
         </table>
         @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", null, new { @class = "btn btn-primary btn-md",})
-
+        @Html.PagedListPager(Model, page => Url.Action("Index", new{ page = page }) )
+       
+        
 </body>
 </html>
