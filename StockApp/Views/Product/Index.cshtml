@@ -5,22 +5,22 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    
-</head>
+
+<head> </head>
 
 <body>
 
-    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Product", FormMethod.Post))
     {
         <div class="form-group row col-lg-2">
             <label class="col-sm-2 col-form-label"> Ara </label>
-            @Html.TextBox("searchText",null , new{@class="form-control"} )
-            </div>
+            @Html.TextBox("searchText", null, new { @class = "form-control" })
+        </div>
         <button type="submit"> Ara </button>
     }
 
-    <table class="table table-bordered table-hover" >
+    <table itemid="tbl1" class="table table-bordered table-hover">
+        <thead>
             <tr>
 
                 <th> Ürün Adı </th>
@@ -36,7 +36,9 @@
                 <th colspan="2"> İşlemler </th>
 
             </tr>
+        </thead>
 
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -54,17 +56,17 @@
 
                     <td style="width:100%; display:flex; flex-direction:row; justify-content:center; align-items:center;">
 
-                    @Html.ActionLink("Güncelle", "Update", "Product", new { @id = item.ProductId }, new { @class = "btn btn-warning", @style = "width:45%; margin-right:3%;" })
-                        @Html.ActionLink("Sil", "Delete", "Product", new { @id = item.ProductId }, new { @class = "btn btn-danger", @style = "width:45%;"})
+                        @Html.ActionLink("Güncelle", "Update", "Product", new { @id = item.ProductId }, new { @class = "btn btn-warning", @style = "width:45%; margin-right:3%;" })
+                        @Html.ActionLink("Sil", "Delete", "Product", new { @id = item.ProductId }, new { @class = "btn btn-danger", @style = "width:45%;" })
 
                     </td>
-
                 </tr>
             }
-        </table>
-        @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", null, new { @class = "btn btn-primary btn-md",})
-        @Html.PagedListPager(Model, page => Url.Action("Index", new{ page = page }) )
-       
-        
+        </tbody>
+
+    </table>
+    @Html.ActionLink("Yeni Ürün Ekle", "Add", "Product", null, new { @class = "btn btn-primary btn-md", })
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+   
 </body>
 </html>

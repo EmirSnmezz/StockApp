@@ -81,6 +81,10 @@
             "bootstrap": {
               "target": "Package",
               "version": "[5.3.3, )"
+            },
+            "jquery.datatables": {
+              "target": "Package",
+              "version": "[1.10.15, )"
             }
           },
           "imports": [
